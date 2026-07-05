@@ -64,5 +64,5 @@ if (isMain) {
     webOrigin: process.env.WEB_ORIGIN,
   });
   const port = process.env.PORT ?? 3000;
-  app.listen(port, () => console.log(`TitusHouse rodando na porta ${port}`));
+  app.listen(port, () => console.log(`TitusHouse rodando na porta ${port} (WEB_ORIGIN="${process.env.WEB_ORIGIN || "(não definido)"}")`));
 }
