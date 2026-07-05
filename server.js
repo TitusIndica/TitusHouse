@@ -35,7 +35,7 @@ export function createApp({ db, tags, expectedToken, webOrigin }) {
   app.use("/go", createGoRouter({ db, tags }));
   app.use("/admin", createAdminRouter({ db, expectedToken }));
   app.use("/api", createPublicRouter({ db }));
-  app.get("/health", (req, res) => res.json({ ok: true }));
+  app.get("/health", (req, res) => res.json({ ok: true, webOrigin: process.env.WEB_ORIGIN || null }));
 
   app.use((req, res) => {
     return res.status(404).json({ error: "Rota não encontrada" });
