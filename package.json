@@ -1,0 +1,25 @@
+{
+  "name": "titushouse-hub",
+  "version": "2.0.0",
+  "description": "Hub de redirecionamento de links de afiliado (Amazon, ML) com vitrine publica - TitusHouse",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "seed": "node seed.js",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.14.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.9"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

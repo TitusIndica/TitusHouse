@@ -1,0 +1,26 @@
+# env
+.env
+.env.*
+!.env.example
+
+# sqlite
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+data.db
+
+# deps
+node_modules/
+
+# logs
+*.log
+npm-debug.log*
+
+# os
+.DS_Store
+Thumbs.db
+
+# editor
+.vscode/
+.idea/
