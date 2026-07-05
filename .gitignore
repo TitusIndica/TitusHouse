@@ -24,3 +24,6 @@ Thumbs.db
 # editor
 .vscode/
 .idea/
+
+# produtos reais (nao commitar dados nao curados)
+produtos.reais.json

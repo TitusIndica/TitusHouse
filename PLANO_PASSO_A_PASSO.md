@@ -109,6 +109,38 @@ Reuna 10 produtos tech/games reais. Para cada produto colete:
 - Amazon: painel Associates -> "Taxas de comissao" (1-12%)
 - ML: painel -> "Categorias e comissoes"
 
+### Como cadastrar produtos reais no hub (sem inventar dados)
+
+O `seed.js` popula o banco com 8 produtos DEMO (ASIN/ML_ID ficticios) — serve
+pra vitrine nao ficar vazia e pra testes passarem. **Nao sao produtos reais.**
+
+Para inserir produtos reais usando a API admin:
+
+1. Copie `produtos.exemplo.json` -> `produtos.reais.json` (ja no .gitignore)
+2. Para cada produto real preencha:
+   - `slug` ( unico, em kebab-case )
+   - `nome`
+   - `asin` (Amazon) ou `ml_id` (Mercado Livre)
+   - `loja_prioritaria` (`"amazon"` ou `"ml"`)
+   - `categoria`, `preco`, `imagem_url`, `descricao`
+3. Rode: `node scripts/importar-produtos.js`
+   - Le o `.env` do projeto (`ADMIN_TOKEN` + `TITUS_API_URL` se diferente do padrao)
+   - POST cada produto para `/admin/produtos` no backend em producao
+   - Pula duplicatas com 409
+
+Para descobrir produtos reais do ML automaticamente:
+
+- `node scripts/fetch-ml.js "mouse gamer" 10` -> salva `ml-mouse-gamer.json`
+- Revise o JSON gerado, copie os itens desejados para `produtos.reais.json`
+
+Para limpar produtos demo antes de importar reais (opcional):
+
+```bash
+# no painel Turso ou via db.execute:
+DELETE FROM produtos;
+DELETE FROM cliques;
+```
+
 ---
 
 ## FASE 5 — Documento de setup (guarde tudo)

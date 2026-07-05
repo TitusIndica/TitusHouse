@@ -1,0 +1,24 @@
+[
+  {
+    "slug": "mouse-gamer-logitech-g203",
+    "nome": "Mouse Gamer Logitech G203 Lightsync",
+    "descricao": "8000 DPI, 6 botoes programaveis, RGB LIGHTSYNC. Ideal para FPS e MOBA.",
+    "asin": "B08L2TC2JL",
+    "ml_id": "MLB12345678",
+    "loja_prioritaria": "amazon",
+    "categoria": "Perifericos",
+    "preco": 149.90,
+    "imagem_url": "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=600&q=80"
+  },
+  {
+    "slug": "exemplo-produto-ml",
+    "nome": "Nome Real do Produto (ML)",
+    "descricao": "Descricao real do produto copiada da pagina do ML",
+    "asin": null,
+    "ml_id": "MLB12345678",
+    "loja_prioritaria": "ml",
+    "categoria": "Categoria",
+    "preco": 99.90,
+    "imagem_url": "https://http2.mlstatic.com/D_NQ_NP_XYZ.jpg"
+  }
+]
