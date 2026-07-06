@@ -11,8 +11,61 @@ Backend completo (migrado do better-sqlite3 síncrono para o `@libsql/client` as
 - `npm start` → `node server.js` (produção)
 - `npm run dev` → `node --watch server.js` (hot reload nativo)
 - `npm run seed` → `node seed.js` (popular catálogo)
+- `npm run import-ml` → `node scripts/import-ml.mjs` (CLI interativo para cadastrar produtos)
+  - Modo manual `[m]`: preenche campo a campo
+  - Modo JSON `[j]`: `npm run import-ml -- json arquivo.json` (importa lote)
+  - Modo update `[u]`: `npm run import-ml -- update arquivo.json` (atualiza preco/imagem/ml_id existentes)
+  - Modo seed `[s]`: `npm run import-ml -- seed` (recria catálogo do seed.js)
+- `npm run scraper-ml` → `node scripts/scraper-ml-playwright.mjs` (extrai MLB IDs do hub ML com login manual)
+- `npm run scraper-ml-live` → `node scripts/scraper-ml-interativo.mjs` (monitor interativo: navega e captura precos/imagens)
+- `npm run enrich-ml` → `node scripts/enrich-ml-automatico.mjs` (visita automaticamente TODOS os produtos ML no navegador, captura precos/imagens e salva no banco)
+- `npm run setup-ml` → `node scripts/setup-ml-oauth.mjs` (testa endpoints da API ML)
 - `npm test` → `vitest run` (suíte de testes, single run)
 - `npm run test:watch` → `vitest` (watch mode)
+
+### Extração de dados ML
+
+ML bloqueia acesso programático: API retorna 403 (PolicyAgent), HTTP scraping redireciona pra `account-verification`, login automatizado detectado como bot. Abordagens que funcionam:
+
+**1. Extrair MLB IDs do hub (`npm run scraper-ml`):**
+- Abre navegador Playwright no hub de afiliados
+- Usuário faz login manualmente (resolve CAPTCHA se aparecer)
+- Script extrai MLB IDs e nomes da grid de produtos
+- Salva em `produtos-scraped.json`
+
+**2. Capturar precos/imagens:**
+
+Opção A — Automático (`npm run enrich-ml`):
+- Abre navegador, usuário faz login 1x
+- Script visita automaticamente TODAS as páginas dos produtos cadastrados
+- Captura preco, imagem e categoria de cada um
+- Já salva direto no banco (UPDATE)
+
+Opção B — Manual (`npm run scraper-ml-live`):
+- Abre navegador Playwright em modo vigilante
+- Usuário faz login, depois navega livremente pelos produtos ML
+- Toda página com MLB ID é capturada automaticamente (preco, imagem, nome via meta tags)
+- Ao fechar o navegador, salva em `produtos-scraped.json`
+
+**3. Atualizar banco com dados capturados:**
+```bash
+npm run import-ml -- update produtos-scraped.json
+```
+Atualiza `preco`, `imagem_url`, `categoria` dos produtos existentes (match por `ml_id`).
+
+**Modo manual (alternativa):**
+1. Acesse o produto no ML, copie MLB ID
+2. `npm run import-ml`, modo `[m]`, preencha campos
+3. Ou use `npm run import-ml -- json arquivo.json` para importar lote
+
+### Setup ML API (`npm run setup-ml`)
+
+Script em `scripts/setup-ml-oauth.mjs` que:
+- Lê/coleta `ML_CLIENT_ID` e `ML_CLIENT_SECRET`
+- Testa `client_credentials` (app-level token, sem refresh)
+- Mostra quais endpoints funcionam (categorias ✅, itens/busca ❌)
+
+Roda sem dependências extras (Node 24+ nativo).
 
 Sem lint, typecheck ou build configurados. Não inventar comandos. Stack requer **Node 24+** (`engines.node` declarado em `package.json`; better-sqlite3 12 compila nativamente; 11.x falha em Node 24).
 

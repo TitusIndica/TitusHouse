@@ -8,13 +8,22 @@
     "start": "node server.js",
     "dev": "node --watch server.js",
     "seed": "node seed.js",
+    "import-ml": "node scripts/import-ml.mjs",
+    "setup-ml": "node scripts/setup-ml-oauth.mjs",
+    "scraper-ml": "node scripts/scraper-ml-playwright.mjs",
+    "scraper-ml-live": "node scripts/scraper-ml-interativo.mjs",
+    "enrich-ml": "node scripts/enrich-ml-automatico.mjs",
+    "login-ml": "node scripts/login-ml.mjs",
+    "extract-hub": "node scripts/extract-hub.mjs",
+    "debug-ml-api": "node scripts/debug-ml-api.mjs",
     "test": "vitest run",
     "test:watch": "vitest"
   },
   "dependencies": {
     "@libsql/client": "^0.14.0",
     "dotenv": "^16.4.5",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "playwright": "^1.61.1"
   },
   "devDependencies": {
     "vitest": "^4.1.9"

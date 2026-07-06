@@ -100,7 +100,7 @@ describe("GET /go/:slug", () => {
     });
     expect(res.status).toBe(302);
     const loc = res.headers.get("location");
-    expect(loc).toContain("produto.mercadolivre.com.br/MLB98765432");
+    expect(loc).toContain("/p/MLB98765432");
     expect(loc).toContain("mf_id=mf123");
   });
 

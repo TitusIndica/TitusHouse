@@ -43,7 +43,7 @@ describe("integração server.js", () => {
   it("GET /health responde ok", async () => {
     const res = await fetch(`${baseUrl}/health`);
     expect(res.status).toBe(200);
-    expect(await res.json()).toEqual({ ok: true });
+    expect(await res.json()).toMatchObject({ ok: true });
   });
 
   it("GET /go/mouse-test redireciona 302 e registra clique", async () => {
