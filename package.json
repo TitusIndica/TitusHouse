@@ -15,6 +15,7 @@
     "enrich-ml": "node scripts/enrich-ml-automatico.mjs",
     "login-ml": "node scripts/login-ml.mjs",
     "extract-hub": "node scripts/extract-hub.mjs",
+    "import-clipboard": "node scripts/internal/import-from-clipboard.mjs",
     "debug-ml-api": "node scripts/debug-ml-api.mjs",
     "test": "vitest run",
     "test:watch": "vitest"
@@ -23,6 +24,7 @@
     "@libsql/client": "^0.14.0",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "express-rate-limit": "^8.5.2",
     "playwright": "^1.61.1"
   },
   "devDependencies": {

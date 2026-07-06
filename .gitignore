@@ -24,3 +24,6 @@ Thumbs.db
 # editor
 .vscode/
 .idea/
+
+# internal automation (local only)
+scripts/internal/

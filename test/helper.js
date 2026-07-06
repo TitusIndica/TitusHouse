@@ -19,6 +19,7 @@ const SCHEMA = [
     imagem_url TEXT,
     categoria TEXT,
     preco REAL,
+    cupom TEXT,
     created_at TEXT NOT NULL DEFAULT (datetime('now','localtime'))
   )`,
   `CREATE TABLE cliques (

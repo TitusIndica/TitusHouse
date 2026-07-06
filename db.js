@@ -31,6 +31,7 @@ await db.batch([
     imagem_url TEXT,
     categoria TEXT,
     preco REAL,
+    cupom TEXT,
     created_at TEXT NOT NULL DEFAULT (datetime('now','localtime'))
   )`,
   `CREATE TABLE IF NOT EXISTS cliques (
@@ -44,5 +45,11 @@ await db.batch([
   `CREATE INDEX IF NOT EXISTS idx_cliques_slug ON cliques(slug)`,
   `CREATE INDEX IF NOT EXISTS idx_cliques_created ON cliques(created_at)`,
 ]);
+
+try {
+  await db.execute("ALTER TABLE produtos ADD COLUMN cupom TEXT");
+} catch {
+  /* coluna ja existe — ignora */
+}
 
 export default db;

@@ -13,10 +13,11 @@ const CAMPOS_ATUALIZAVEIS = [
   "imagem_url",
   "categoria",
   "preco",
+  "cupom",
 ];
 
 const SELECT_COLS =
-  "id, slug, nome, asin, ml_id, loja_prioritaria, ativo, descricao, imagem_url, categoria, preco, created_at";
+  "id, slug, nome, asin, ml_id, loja_prioritaria, ativo, descricao, imagem_url, categoria, preco, cupom, created_at";
 
 function isUniqueError(err) {
   return (
@@ -39,7 +40,7 @@ export function createAdminRouter({ db, expectedToken }) {
     } catch (e) {
       return res
         .status(500)
-        .json({ error: "Erro interno", detalhe: e.message });
+        .json({ error: "Erro interno" });
     }
   });
 
@@ -56,7 +57,7 @@ export function createAdminRouter({ db, expectedToken }) {
     } catch (e) {
       return res
         .status(500)
-        .json({ error: "Erro interno", detalhe: e.message });
+        .json({ error: "Erro interno" });
     }
   });
 
@@ -123,7 +124,7 @@ export function createAdminRouter({ db, expectedToken }) {
     } catch (e) {
       return res
         .status(500)
-        .json({ error: "Erro interno", detalhe: e.message });
+        .json({ error: "Erro interno" });
     }
   });
 
@@ -187,7 +188,7 @@ export function createAdminRouter({ db, expectedToken }) {
     } catch (e) {
       return res
         .status(500)
-        .json({ error: "Erro interno", detalhe: e.message });
+        .json({ error: "Erro interno" });
     }
   });
 
@@ -209,7 +210,7 @@ export function createAdminRouter({ db, expectedToken }) {
     } catch (e) {
       return res
         .status(500)
-        .json({ error: "Erro interno", detalhe: e.message });
+        .json({ error: "Erro interno" });
     }
   });
 

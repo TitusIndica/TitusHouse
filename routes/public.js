@@ -1,7 +1,7 @@
 import express from "express";
 
 const PUBLIC_COLS =
-  "slug, nome, descricao, imagem_url, categoria, preco, loja_prioritaria";
+  "slug, nome, descricao, imagem_url, categoria, preco, loja_prioritaria, cupom";
 
 export function createPublicRouter({ db }) {
   const router = express.Router();
@@ -24,7 +24,7 @@ export function createPublicRouter({ db }) {
     } catch (e) {
       return res
         .status(500)
-        .json({ error: "Erro interno", detalhe: e.message });
+        .json({ error: "Erro interno" });
     }
   });
 
@@ -41,7 +41,7 @@ export function createPublicRouter({ db }) {
     } catch (e) {
       return res
         .status(500)
-        .json({ error: "Erro interno", detalhe: e.message });
+        .json({ error: "Erro interno" });
     }
   });
 
@@ -54,7 +54,7 @@ export function createPublicRouter({ db }) {
     } catch (e) {
       return res
         .status(500)
-        .json({ error: "Erro interno", detalhe: e.message });
+        .json({ error: "Erro interno" });
     }
   });
 
