@@ -64,8 +64,7 @@ export function createApp({ db, tags, expectedToken, webOrigin }) {
   app.use("/admin", createAdminRouter({ db, expectedToken }));
   app.use("/api", createPublicRouter({ db }));
   app.get("/", (req, res) => {
-    const frontend = allowedOrigin !== "*" ? allowedOrigin : "https://titusindica.github.io/TitusHouse-web";
-    return res.redirect(301, frontend);
+    return res.redirect(301, "https://titusindica.github.io/TitusHouse-web");
   });
   app.get("/health", (req, res) => res.json({ ok: true }));
 
