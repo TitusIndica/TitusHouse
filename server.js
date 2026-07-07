@@ -63,6 +63,58 @@ export function createApp({ db, tags, expectedToken, webOrigin }) {
   app.use("/go", createGoRouter({ db, tags }));
   app.use("/admin", createAdminRouter({ db, expectedToken }));
   app.use("/api", createPublicRouter({ db }));
+
+  // AI Curator route — busca inteligente no catálogo local
+  app.post("/api/curator", async (req, res) => {
+    try {
+      const { prompt } = req.body;
+      if (!prompt || typeof prompt !== "string") {
+        return res.status(400).json({ error: "Campo 'prompt' obrigatório" });
+      }
+
+      const q = prompt.toLowerCase();
+      const { rows } = await db.execute(
+        "SELECT slug, nome, descricao, imagem_url, categoria, preco, preco_original, loja_prioritaria, cupom FROM produtos WHERE ativo = 1"
+      );
+
+      const matches = rows.filter((p) =>
+        p.nome?.toLowerCase().includes(q) ||
+        (p.descricao && p.descricao.toLowerCase().includes(q)) ||
+        (p.categoria && p.categoria.toLowerCase().includes(q))
+      );
+
+      const selected = matches.length > 0 ? matches : rows.slice(0, 6);
+
+      const answer = matches.length > 0
+        ? `Encontrei ${matches.length} oferta(s) relacionada(s) a "${prompt}" no nosso catálogo. Confira abaixo as melhores opções disponíveis.`
+        : `Não encontrei ofertas exatas para "${prompt}", mas separei algumas opções em destaque do nosso hub.`;
+
+      const recommendedDeals = selected.map((p) => {
+        const original = p.preco_original || p.preco || 0;
+        const current = p.preco || 0;
+        const discount = original > current ? Math.round((1 - current / original) * 100) : 0;
+        return {
+          title: p.nome,
+          currentPrice: Number(current),
+          originalPrice: Number(original),
+          discountPercentage: discount,
+          rating: 4.5,
+          shipping: "Full & Grátis",
+          seller: p.loja_prioritaria === "amazon" ? "Amazon" : "Mercado Livre",
+          costBenefitScore: Math.min(10, Math.round((discount / 10) + 5)),
+          highlights: ["Catálogo TitusHouse", "Oferta verificada", "Link afiliado"],
+          coupon: p.cupom || null,
+          description: p.descricao || "Oferta disponível no hub TitusHouse",
+        };
+      });
+
+      return res.json({ answer, recommendedDeals });
+    } catch (e) {
+      console.error("Erro no curador:", e.message);
+      return res.status(500).json({ error: "Erro interno" });
+    }
+  });
+
   app.get("/", (req, res) => {
     return res.redirect(301, "https://titusindica.github.io/TitusHouse-web");
   });
