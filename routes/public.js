@@ -9,18 +9,52 @@ export function createPublicRouter({ db }) {
   router.get("/produtos", async (req, res, next) => {
     try {
       const categoria = req.query.categoria;
-      let result;
+      const page = Math.max(1, parseInt(req.query.page, 10) || 1);
+      const limit = Math.min(100, Math.max(1, parseInt(req.query.limit, 10) || 50));
+      const offset = (page - 1) * limit;
+
+      const where = ["ativo = 1"];
+      const args = [];
       if (categoria) {
-        result = await db.execute({
-          sql: `SELECT ${PUBLIC_COLS} FROM produtos WHERE ativo = 1 AND categoria = ? ORDER BY id DESC`,
-          args: [categoria],
-        });
-      } else {
-        result = await db.execute(
-          `SELECT ${PUBLIC_COLS} FROM produtos WHERE ativo = 1 ORDER BY id DESC`
-        );
+        where.push("categoria = ?");
+        args.push(categoria);
       }
-      return res.status(200).json(result.rows);
+      const whereClause = where.join(" AND ");
+
+      const [{ rows: countRows }, { rows }] = await db.batch([
+        { sql: `SELECT COUNT(*) as total FROM produtos WHERE ${whereClause}`, args },
+        { sql: `SELECT ${PUBLIC_COLS} FROM produtos WHERE ${whereClause} ORDER BY id DESC LIMIT ? OFFSET ?`, args: [...args, limit, offset] },
+      ]);
+
+      const total = Number(countRows[0].total);
+      const pages = Math.max(1, Math.ceil(total / limit));
+
+      return res.status(200).json({
+        data: rows,
+        total,
+        page,
+        pages,
+        limit,
+      });
+    } catch (e) {
+      return res
+        .status(500)
+        .json({ error: "Erro interno" });
+    }
+  });
+
+  router.get("/produtos/grupos", async (req, res, next) => {
+    try {
+      const { rows } = await db.execute(
+        `SELECT ${PUBLIC_COLS} FROM produtos WHERE ativo = 1 ORDER BY categoria, id DESC`
+      );
+      const grupos = {};
+      for (const row of rows) {
+        const cat = row.categoria || "Outros";
+        if (!grupos[cat]) grupos[cat] = [];
+        grupos[cat].push(row);
+      }
+      return res.status(200).json(grupos);
     } catch (e) {
       return res
         .status(500)

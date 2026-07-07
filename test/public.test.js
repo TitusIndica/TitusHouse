@@ -35,10 +35,15 @@ describe("rotas publicas /api", () => {
     return `http://localhost:${port}/api${p}`;
   }
 
-  it("1. vitrine vazia retorna 200 []", async () => {
+  it("1. vitrine vazia retorna paginacao vazia", async () => {
     const res = await fetch(api("/produtos"));
     expect(res.status).toBe(200);
-    expect(await res.json()).toEqual([]);
+    const body = await res.json();
+    expect(body).toHaveProperty("data");
+    expect(body).toHaveProperty("total", 0);
+    expect(body).toHaveProperty("pages", 1);
+    expect(body).toHaveProperty("page", 1);
+    expect(body.data).toEqual([]);
   });
 
   it("2. lista produtos ativos com whitelist de campos", async () => {
@@ -51,8 +56,8 @@ describe("rotas publicas /api", () => {
     });
     const res = await fetch(api("/produtos"));
     expect(res.status).toBe(200);
-    const arr = await res.json();
-    const row = arr.find((r) => r.slug === "ativo-1");
+    const body = await res.json();
+    const row = body.data.find((r) => r.slug === "ativo-1");
     expect(row).toBeDefined();
     const keys = Object.keys(row);
     expect(keys).toEqual(
@@ -80,8 +85,8 @@ describe("rotas publicas /api", () => {
       ativo: 0,
     });
     const res = await fetch(api("/produtos"));
-    const arr = await res.json();
-    expect(arr.find((r) => r.slug === "inativo-1")).toBeUndefined();
+    const body = await res.json();
+    expect(body.data.find((r) => r.slug === "inativo-1")).toBeUndefined();
   });
 
   it("4. GET /produtos/:slug ativo -> 200 com whitelist", async () => {
@@ -141,9 +146,9 @@ describe("rotas publicas /api", () => {
   it("8. GET /produtos?categoria= periféricos filtra", async () => {
     const res = await fetch(api("/produtos?categoria=perifericos"));
     expect(res.status).toBe(200);
-    const arr = await res.json();
-    expect(arr.length).toBe(2);
-    expect(arr.every((r) => r.categoria === "perifericos")).toBe(true);
+    const body = await res.json();
+    expect(body.data.length).toBe(2);
+    expect(body.data.every((r) => r.categoria === "perifericos")).toBe(true);
   });
 
   it("9. lista ordenada por id DESC", async () => {
@@ -160,7 +165,38 @@ describe("rotas publicas /api", () => {
       },
     ]);
     const res = await fetch(api("/produtos"));
-    const arr = await res.json();
-    expect(arr.map((r) => r.slug)).toEqual(["ord-3", "ord-2", "ord-1"]);
+    const body = await res.json();
+    expect(body.data.map((r) => r.slug)).toEqual(["ord-3", "ord-2", "ord-1"]);
+  });
+
+  it("10. GET /produtos/grupos retorna agrupado por categoria", async () => {
+    await db.batch([
+      { sql: "DELETE FROM produtos" },
+      { sql: "INSERT INTO produtos (slug, nome, loja_prioritaria, categoria, ativo) VALUES ('g1', 'G1', 'amazon', 'perifericos', 1)" },
+      { sql: "INSERT INTO produtos (slug, nome, loja_prioritaria, categoria, ativo) VALUES ('g2', 'G2', 'amazon', 'perifericos', 1)" },
+      { sql: "INSERT INTO produtos (slug, nome, loja_prioritaria, categoria, ativo) VALUES ('g3', 'G3', 'amazon', 'acessorios', 1)" },
+    ]);
+    const res = await fetch(api("/produtos/grupos"));
+    expect(res.status).toBe(200);
+    const grupos = await res.json();
+    expect(grupos).toHaveProperty("perifericos");
+    expect(grupos.perifericos.length).toBe(2);
+    expect(grupos.acessorios.length).toBe(1);
+  });
+
+  it("11. GET /produtos?page=1&limit=1 retorna paginado", async () => {
+    await db.batch([
+      { sql: "DELETE FROM produtos" },
+      { sql: "INSERT INTO produtos (slug, nome, loja_prioritaria, ativo) VALUES ('pag-1', 'Pag1', 'amazon', 1)" },
+      { sql: "INSERT INTO produtos (slug, nome, loja_prioritaria, ativo) VALUES ('pag-2', 'Pag2', 'amazon', 1)" },
+      { sql: "INSERT INTO produtos (slug, nome, loja_prioritaria, ativo) VALUES ('pag-3', 'Pag3', 'amazon', 1)" },
+    ]);
+    const res = await fetch(api("/produtos?page=1&limit=1"));
+    const body = await res.json();
+    expect(body.data.length).toBe(1);
+    expect(body.page).toBe(1);
+    expect(body.pages).toBe(3);
+    expect(body.total).toBe(3);
+    expect(body.data[0].slug).toBe("pag-3");
   });
 });
