@@ -19,6 +19,7 @@ const SCHEMA = [
     imagem_url TEXT,
     categoria TEXT,
     preco REAL,
+    preco_original REAL,
     cupom TEXT,
     created_at TEXT NOT NULL DEFAULT (datetime('now','localtime'))
   )`,

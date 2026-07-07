@@ -13,11 +13,12 @@ const CAMPOS_ATUALIZAVEIS = [
   "imagem_url",
   "categoria",
   "preco",
+  "preco_original",
   "cupom",
 ];
 
 const SELECT_COLS =
-  "id, slug, nome, asin, ml_id, loja_prioritaria, ativo, descricao, imagem_url, categoria, preco, cupom, created_at";
+  "id, slug, nome, asin, ml_id, loja_prioritaria, ativo, descricao, imagem_url, categoria, preco, preco_original, cupom, created_at";
 
 function isUniqueError(err) {
   return (
@@ -94,7 +95,7 @@ export function createAdminRouter({ db, expectedToken }) {
 
       try {
         const info = await db.execute({
-          sql: "INSERT INTO produtos (slug, nome, asin, ml_id, loja_prioritaria, ativo, descricao, imagem_url, categoria, preco) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+          sql: "INSERT INTO produtos (slug, nome, asin, ml_id, loja_prioritaria, ativo, descricao, imagem_url, categoria, preco, preco_original) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
           args: [
             body.slug,
             body.nome,
@@ -106,6 +107,7 @@ export function createAdminRouter({ db, expectedToken }) {
             body.imagem_url ?? null,
             body.categoria ?? null,
             body.preco ?? null,
+            body.preco_original ?? null,
           ],
         });
 

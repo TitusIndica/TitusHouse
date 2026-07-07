@@ -51,5 +51,10 @@ try {
 } catch {
   /* coluna ja existe — ignora */
 }
+try {
+  await db.execute("ALTER TABLE produtos ADD COLUMN preco_original REAL");
+} catch {
+  /* coluna ja existe — ignora */
+}
 
 export default db;
