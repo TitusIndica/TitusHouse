@@ -52,7 +52,7 @@ export function createApp({ db, tags, expectedToken, webOrigin }) {
       );
       return res.status(204).end();
     }
-    if (req.path.startsWith("/api") || req.path.startsWith("/go")) {
+    if (req.path.startsWith("/api") || req.path.startsWith("/go") || req.path.startsWith("/admin")) {
       res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
     }
     next();
