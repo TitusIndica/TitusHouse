@@ -1,0 +1,195 @@
+[
+  {
+    "slug": "monitor-lg-ultragear-27-240hz",
+    "nome": "Monitor LG UltraGear 27\" — 240Hz, 1ms, G-SYNC, FreeSync",
+    "asin": "B0GNDP4LTL",
+    "loja_prioritaria": "amazon",
+    "categoria": "Monitor",
+    "preco": 1359.00,
+    "preco_original": 1699.85,
+    "imagem_url": "https://m.media-amazon.com/images/I/61SrxpFHcDL._AC_SL1200_.jpg",
+    "bullets": [
+      "27\" Full HD, 240Hz de taxa de atualização",
+      "1ms (GtG) tempo de resposta",
+      "NVIDIA G-SYNC + AMD FreeSync Premium",
+      "sRGB 99% (Typ.) — cores precisas",
+      "HDMI 2.0, DisplayPort"
+    ]
+  },
+  {
+    "slug": "jbl-tune-720bt-fone-bluetooth",
+    "nome": "JBL Tune 720BT — Fone de Ouvido Bluetooth, Preto",
+    "asin": "B0BWVQKSSY",
+    "loja_prioritaria": "amazon",
+    "categoria": "Fone / Áudio",
+    "preco": 199.00,
+    "preco_original": null,
+    "imagem_url": "https://m.media-amazon.com/images/I/51JNhjr4McL._AC_SL1500_.jpg",
+    "bullets": [
+      "Som JBL Pure Bass",
+      "Até 76 horas de bateria",
+      "Conexão Bluetooth 5.3",
+      "Carregamento rápido (5min = 3h)"
+    ]
+  },
+  {
+    "slug": "msi-rtx-5070-ti-16gb",
+    "nome": "MSI GeForce RTX 5070 Ti 16G Shadow 3X OC",
+    "asin": "B0DZD6QV9L",
+    "loja_prioritaria": "amazon",
+    "categoria": "Hardware",
+    "preco": 7499.00,
+    "preco_original": null,
+    "imagem_url": "https://m.media-amazon.com/images/I/719ozZSEaQL._AC_SL1500_.jpg",
+    "bullets": [
+      "16GB GDDR7 28Gbps, 256-bit",
+      "PCIe 5.0, Boost Clock 2482MHz",
+      "HDMI 2.1b, DisplayPort 2.1b",
+      "3x fans TORX Fan 5.0"
+    ]
+  },
+  {
+    "slug": "galax-rtx-5060-ti-8gb",
+    "nome": "Galax GeForce RTX 5060 Ti 8GB 1-Click OC GDDR7",
+    "asin": "B0FYRKFQ1S",
+    "loja_prioritaria": "amazon",
+    "categoria": "Hardware",
+    "preco": 3499.00,
+    "preco_original": null,
+    "imagem_url": "https://m.media-amazon.com/images/I/519wHa2bbLL._AC_SL1000_.jpg",
+    "bullets": [
+      "8GB GDDR7 128-bit",
+      "PCIe 5.0, 1-Click OC",
+      "HDMI + DisplayPort",
+      "Arquitetura NVIDIA Blackwell"
+    ]
+  },
+  {
+    "slug": "logitech-mx-keys-s-teclado-sem-fio",
+    "nome": "Logitech MX Keys S — Teclado Sem Fio, Bluetooth, Grafite",
+    "asin": "B0C6K19YBH",
+    "loja_prioritaria": "amazon",
+    "categoria": "Acessórios",
+    "preco": 689.00,
+    "preco_original": null,
+    "imagem_url": "https://m.media-amazon.com/images/I/71Zxjm6UPmL._AC_SL1500_.jpg",
+    "bullets": [
+      "Clique silencioso e teclas programáveis",
+      "Iluminação inteligente com sensor de proximidade",
+      "Bluetooth + USB Logi Bolt",
+      "Bateria recarregável (até 10 dias)"
+    ]
+  },
+  {
+    "slug": "logitech-mx-keys-s-combo-teclado-mouse",
+    "nome": "Combo Logitech MX Keys S + Mouse MX — Sem Fio, Bluetooth, Grafite",
+    "asin": "B0C6JZ2ZDN",
+    "loja_prioritaria": "amazon",
+    "categoria": "Acessórios",
+    "preco": 899.00,
+    "preco_original": null,
+    "imagem_url": "https://m.media-amazon.com/images/I/61dHtG0j4hL._AC_SL1500_.jpg",
+    "bullets": [
+      "Teclado MX Keys S + Mouse MX",
+      "Iluminação inteligente, clique silencioso",
+      "Bluetooth + USB Logi Bolt",
+      "Compatível Windows, macOS, ChromeOS, Linux"
+    ]
+  },
+  {
+    "slug": "logitech-pebble-keys-2-k380s-branco",
+    "nome": "Logitech Pebble Keys 2 K380s — Teclado Bluetooth, Branco",
+    "asin": "B0CJ3J2WCR",
+    "loja_prioritaria": "amazon",
+    "categoria": "Acessórios",
+    "preco": 179.00,
+    "preco_original": null,
+    "imagem_url": "https://m.media-amazon.com/images/I/61y-lcvG7VL._AC_SL1500_.jpg",
+    "bullets": [
+      "Bluetooth Easy-Switch (3 dispositivos)",
+      "Compacto e leve (415g)",
+      "Pilha inclusa (até 36 meses)",
+      "Compatível PC, Mac, Android, iOS, Apple TV"
+    ]
+  },
+  {
+    "slug": "logitech-m280-mouse-sem-fio-cinza",
+    "nome": "Logitech M280 — Mouse Sem Fio, Conexão USB, Cinza",
+    "asin": "B00UC1R7XA",
+    "loja_prioritaria": "amazon",
+    "categoria": "Acessórios",
+    "preco": 82.00,
+    "preco_original": null,
+    "imagem_url": "https://m.media-amazon.com/images/I/61yWjO0b6vL._AC_SL1500_.jpg",
+    "bullets": [
+      "Conexão wireless 2.4GHz (nanoreceptor USB)",
+      "Design ergonômico com laterais de borracha",
+      "Pilha inclusa (até 18 meses)",
+      "Compatível Windows, macOS, ChromeOS, Linux"
+    ]
+  },
+  {
+    "slug": "nintendo-switch-oled-bundle-mario",
+    "nome": "Bundle Nintendo Switch OLED + Super Mario Bros. Wonder + 3 Meses Switch Online",
+    "asin": "B0FR6PC1FB",
+    "loja_prioritaria": "amazon",
+    "categoria": "Acessórios",
+    "preco": 2199.00,
+    "preco_original": null,
+    "imagem_url": "https://m.media-amazon.com/images/I/61JwTVae3+L._AC_SL1000_.jpg",
+    "bullets": [
+      "Tela OLED 7\" vibrante",
+      "Super Mario Bros. Wonder incluso",
+      "3 meses de Nintendo Switch Online",
+      "Joy-Cons destacáveis"
+    ]
+  },
+  {
+    "slug": "samsung-galaxy-tab-s10-fe-plus",
+    "nome": "Samsung Galaxy Tab S10 FE+ — WiFi, 128GB, 8GB, Tela 13.1\" 90Hz, Azul",
+    "asin": "B0F6NLGYGJ",
+    "loja_prioritaria": "amazon",
+    "categoria": "Tablet",
+    "preco": 2999.00,
+    "preco_original": null,
+    "imagem_url": "https://m.media-amazon.com/images/I/51-rwVkAl9L._AC_SL1000_.jpg",
+    "bullets": [
+      "Tela 13.1\" 90Hz, 2560x1600",
+      "8GB RAM + 128GB SSD (expansível)",
+      "S Pen e Capa inclusas",
+      "WiFi 6, Bateria de longa duração"
+    ]
+  },
+  {
+    "slug": "logitech-g203-lightsync-rgb",
+    "nome": "Mouse Gamer Logitech G203 — LIGHTSYNC RGB, 8000 DPI, Preto",
+    "asin": "B08B459R11",
+    "loja_prioritaria": "amazon",
+    "categoria": "Acessórios",
+    "preco": 129.90,
+    "preco_original": null,
+    "imagem_url": "https://m.media-amazon.com/images/I/61jGCg3NufL._AC_SL1500_.jpg",
+    "bullets": [
+      "Sensor óptico de 8000 DPI com configuração de sensibilidade",
+      "LIGHTSYNC RGB com 16,8 milhões de cores e efeitos personalizáveis",
+      "Design clássico de 6 botões com botões programáveis",
+      "Construção durável com cabos de 2,10m"
+    ]
+  },
+  {
+    "slug": "redragon-cobra-pro-m711-wireless",
+    "nome": "Mouse Gamer Redragon Cobra Pro M711 — Sem Fio, RGB, 26000 DPI",
+    "asin": "B0CWB2H58J",
+    "loja_prioritaria": "amazon",
+    "categoria": "Acessórios",
+    "preco": 179.90,
+    "preco_original": null,
+    "imagem_url": "https://m.media-amazon.com/images/I/41Qzv5IRAGL._AC_SL1000_.jpg",
+    "bullets": [
+      "Wireless 2.4GHz + Bluetooth + Cabo USB-C",
+      "Sensor 26000 DPI, 650 IPS, 50G",
+      "12 botões programáveis com software",
+      "RGB Chroma, bateria recarregável"
+    ]
+  }
+]

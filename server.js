@@ -26,16 +26,22 @@ const apiLimiter = rateLimit({
 });
 
 function setSecurityHeaders(req, res, next) {
+  res.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'");
   res.setHeader("X-Content-Type-Options", "nosniff");
   res.setHeader("X-Frame-Options", "DENY");
+  res.setHeader("X-XSS-Protection", "1; mode=block");
   res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
   res.setHeader("Permissions-Policy", "geolocation=(), microphone=(), camera=()");
+  if (req.secure || req.headers["x-forwarded-proto"] === "https") {
+    res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
+  }
   next();
 }
 
 export function createApp({ db, tags, expectedToken, webOrigin }) {
   const app = express();
-  app.use(express.json());
+  app.disable("x-powered-by");
+  app.use(express.json({ limit: "100kb" }));
   app.use(setSecurityHeaders);
 
   const allowedOrigin = webOrigin || process.env.WEB_ORIGIN || "*";
@@ -70,6 +76,9 @@ export function createApp({ db, tags, expectedToken, webOrigin }) {
       const { prompt } = req.body;
       if (!prompt || typeof prompt !== "string") {
         return res.status(400).json({ error: "Campo 'prompt' obrigatório" });
+      }
+      if (prompt.length > 500) {
+        return res.status(400).json({ error: "Prompt deve ter no máximo 500 caracteres" });
       }
 
       const q = prompt.toLowerCase();
@@ -137,6 +146,8 @@ const isMain =
 
 if (isMain) {
   const db = (await import("./db.js")).default;
+  const { migrateAmazonProducts } = await import("./scripts/migrate-startup.mjs");
+  await migrateAmazonProducts(db);
   const app = createApp({
     db,
     tags: {

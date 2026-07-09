@@ -1,7 +1,7 @@
 import express from "express";
 
 const PUBLIC_COLS =
-  "slug, nome, descricao, imagem_url, categoria, preco, preco_original, loja_prioritaria, cupom";
+  "slug, nome, asin, descricao, imagem_url, categoria, preco, preco_original, loja_prioritaria, cupom";
 
 export function createPublicRouter({ db }) {
   const router = express.Router();

@@ -136,3 +136,24 @@ Mapeamento da stack do TitusHouse para recursos verificados em `../awesome-copil
 Notas:
 - Recursos do `awesome-copilot` são **documentos de referência**, não auto-aplicados no opencode: `SKILL.md` e `.instructions.md` (mesmo com `applyTo`) são só textos a consultar manualmente ao tocar a parte correspondente.
 - Nenhuma skill cobre Render deploy especificamente; seguir o `PLANO_PASSO_A_PASSO.md` FASE 2 e o free-tier (hiberna em 15min, UptimeRobot opcional).
+
+## Memória de Segurança — Varredura 2026-07-06
+
+### Proteções ativas
+- `detalhe: e.message` removido de todas rotas (server.js, routes/*)
+- `ADMIN_TOKEN` só via header `x-admin-token` (query string removida)
+- Rate limiting: admin 100 req/15min, API 60 req/min (`express-rate-limit`)
+- CORS cobre `/api`, `/admin`, `/go` (preflight OPTIONS)
+- Security headers: `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Referrer-Policy`, `Permissions-Policy`
+
+### Riscos residuais (não corrigidos — requer ação manual)
+1. **Secrets em `.env` no disco** — `TURSO_AUTH_TOKEN` (rw até 2026), `ML_CLIENT_ID`/`ML_CLIENT_SECRET`, `ML_PASSWORD` (`acesso18*`), `ADMIN_TOKEN`. `.gitignore` cobre `.env` corretamente. Rotacionar antes de compartilhar máquina ou subir p/ produção.
+2. **Open redirect via `amazon_affiliate_url`/`ml_affiliate_url`** — se admin for comprometido, pode redirecionar p/ site malicioso. Futuro: validar URL no admin.
+3. **Sem CSP, HSTS, CSRF token** — aceitável p/ MVP, adicionar antes de SaaS multi-usuário.
+4. **ML API credentials expostas** — `ML_CLIENT_SECRET` e `ML_PASSWORD` em texto plano no `.env`. Revogar no devcenter do ML e regenerar.
+
+### Gatilhos p/ nova varredura
+- Antes de qq deploy p/ produção
+- Após adicionar auth de usuários ou pagamentos
+- Após qualquer alteração em middleware de auth ou rotas admin
+- Se repo se tornar público
