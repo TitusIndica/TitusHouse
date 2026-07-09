@@ -133,7 +133,7 @@
     "nome": "Bundle Nintendo Switch OLED + Super Mario Bros. Wonder + 3 Meses Switch Online",
     "asin": "B0FR6PC1FB",
     "loja_prioritaria": "amazon",
-    "categoria": "Acessórios",
+    "categoria": "Console",
     "preco": 2199.00,
     "preco_original": null,
     "imagem_url": "https://m.media-amazon.com/images/I/61JwTVae3+L._AC_SL1000_.jpg",
@@ -158,22 +158,6 @@
       "8GB RAM + 128GB SSD (expansível)",
       "S Pen e Capa inclusas",
       "WiFi 6, Bateria de longa duração"
-    ]
-  },
-  {
-    "slug": "logitech-g203-lightsync-rgb",
-    "nome": "Mouse Gamer Logitech G203 — LIGHTSYNC RGB, 8000 DPI, Preto",
-    "asin": "B08B459R11",
-    "loja_prioritaria": "amazon",
-    "categoria": "Acessórios",
-    "preco": 129.90,
-    "preco_original": null,
-    "imagem_url": "https://m.media-amazon.com/images/I/61jGCg3NufL._AC_SL1500_.jpg",
-    "bullets": [
-      "Sensor óptico de 8000 DPI com configuração de sensibilidade",
-      "LIGHTSYNC RGB com 16,8 milhões de cores e efeitos personalizáveis",
-      "Design clássico de 6 botões com botões programáveis",
-      "Construção durável com cabos de 2,10m"
     ]
   },
   {
