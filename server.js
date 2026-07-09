@@ -125,7 +125,7 @@ export function createApp({ db, tags, expectedToken, webOrigin }) {
   });
 
   app.get("/", (req, res) => {
-    return res.redirect(301, "https://titusindica.github.io/TitusHouse-web");
+    return res.redirect(301, "https://titushouse-next.vercel.app");
   });
   app.get("/health", (req, res) => res.json({ ok: true }));
 
